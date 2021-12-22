@@ -1,0 +1,92 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolboxcategories>CAT_LOGIC,CAT_LOOPS,CAT_MATH,CAT_ARRAY,CAT_TEXT,CAT_VARIABLES,CAT_FUNCTIONS,CAT_ARDUINO,CAT_ANEMOROTATION,CAT_LCD_SCREEN,CAT_BLUETOOTH_MISC,CAT_ROBOT_MISC,CAT_I2C,CAT_SPI,CAT_APDS_9960_RGB_Gesture,CAT_HX711,CAT_OLED_U8G,CAT_LED_RGB_CHAIN,CAT_MATRIX_LED_RGB,CAT_DRONE,CAT_DFRobot,CAT_ICN,CAT_ROBUNO,CAT_FISCHERTECHNIK,CAT_FLYCAMONE,CAT_MHK,CAT_BQ,CAT_JEULIN,CAT_GROVE,CAT_MULTIFUNCTION,CAT_RFID,CAT_TECHNOZONE,CAT_MESURE,CAT_TECHNOZONE_ROBOT,CAT_ZUMO,CAT_ROBOTS_MOTORS,CAT_MBOT_1,CAT_MBOT_2,CAT_MBOT_3,CAT_MBOT_4,CAT_STEPPER,CAT_ESUS,CAT_MRDUINO,CAT_ARDUINO_SERVO,CAT_ADXL362,CAT_BT_ELECTRONICS,CAT_jfblocks,CAT_KEYPAD,CAT_SHARP,CAT_ETHERNET,CAT_BLYNK_CC,CAT_AUTODUINO</toolboxcategories>
+  <toolbox>toolbox_arduino_all</toolbox>
+  <block type="biblio_include" id="9W%dS@aG=_$)QiXwvC/A" x="-62" y="-1663">
+    <field name="File">DallasTemperature</field>
+  </block>
+  <block type="variables_set" id="#X.ajHI1JJDn52r|x}Sk" x="-62" y="-1613">
+    <field name="VAR">sensor</field>
+    <value name="VALUE">
+      <block type="ds18b20_search" id="y@aFDI}go-XO=JEuNK%J">
+        <field name="ds18b20_pin">2</field>
+        <field name="address">5</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set_init" id="zofr.L_FFgnW^rUo[0kx">
+        <field name="VAR">Celcius</field>
+        <value name="VALUE">
+          <block type="conversion_tofloat" id=";$by[Tmlh$0|emOmTI+]">
+            <value name="NAME">
+              <block type="math_number" id="C:/?c,`=s-oeL4#FOLE2">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+  <block type="base_setup_loop" id=":%H+9$AIb4Pvpnl5YrJ~" x="-63" y="-1437">
+    <statement name="DO">
+      <block type="serial_init" id="/z*%yJ;fXIfRS?%8o^[#" inline="false">
+        <field name="SPEED">9600</field>
+        <next>
+          <block type="base_code" id="={e*UW?0zH]aY:YrIGYo">
+            <field name="TEXT">sensors.begin();</field>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="LOOP">
+      <block type="base_code" id="r9Viy.g;XSBpYAU][+p@">
+        <field name="TEXT">sensors.requestTemperatures()</field>
+        <next>
+          <block type="base_code" id=":0Z.vI[5(-kbIX%fGRIb">
+            <field name="TEXT">Celcius = sensors.getTempCByIndex(0)</field>
+            <next>
+              <block type="serial_print_var" id="r}cGP6L1,RYGDfc5VBKs" inline="false">
+                <value name="Text">
+                  <shadow type="text" id="K2z+#.h!m,oBlh`4v.0*">
+                    <field name="TEXT">Temperature</field>
+                  </shadow>
+                </value>
+                <value name="N">
+                  <shadow type="math_number" id=",|eXo?GR%KwX6WCtx,R^">
+                    <field name="NUM">0</field>
+                  </shadow>
+                  <block type="variables_get" id="uZrPV4nv?jY42kil]ZX[" inline="false">
+                    <field name="VAR">Celcius</field>
+                  </block>
+                </value>
+                <value name="NEW_LINE">
+                  <shadow type="logic_boolean" id="D|CmjhD2c+.P]XA.,)+L">
+                    <field name="BOOL">FALSE</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="serial_println" id="m!^_rc|!C6@5:ARk4*)," inline="false">
+                    <value name="CONTENT">
+                      <shadow type="text" id="!:hXqBse+wFWjPC!d.h,">
+                        <field name="TEXT">C</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="base_delay" id="rwnku@6eWk`r]b?1=;H0" inline="false">
+                        <value name="DELAY_TIME">
+                          <shadow type="math_number" id="OG#.0.HA@i2(}@+NJX[p">
+                            <field name="NUM">1000</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
